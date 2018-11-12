@@ -19,8 +19,9 @@
 	- [N+K](#nk)
 - [Searching](#searching)
 - [Processes and Threads](#processes-and-threads)
-- [OO](#oo)
+- [Languages](#languages)
 - [Design Patterns](#design-patterns)
+	- [OO (Object-Oriented)](#oo-object-oriented)
 	- [Creation](#creation)
 	- [Composition (Structural)](#composition-structural)
 	- [Behavioral](#behavioral)
@@ -237,13 +238,18 @@ Stable sort is one that retains order of equal values.
 * Starvation. Thread unable to access a resource.
 * Race Condition. Multiple threads mutating shared data at the same time, uncertain ordering of processing. Avoid with locks or timestamps.
 
-## OO
+## Languages
+
+* Imperitive
+* Declarative (Functional a subcategory)
+
+## Design Patterns
+
+### OO (Object-Oriented)
 
 * Encapsulation—reusable, self-contained (sometimes "black-box") components of related state and behavior.
 * Inheritance—defined behavior and characterstics between objects.
 * Polymorphism—different objects that share the same in interface ("many forms") and can be used interchangeably.
-
-## Design Patterns
 
 ### Creation
 
