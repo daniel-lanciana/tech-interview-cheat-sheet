@@ -155,7 +155,7 @@ Self-balancing trees automatically balance the height of nodes to keep search op
 * Recursion
   * See: recursion.
 * Greedy
-  * Take the optimal solution at each step (even if worse overall). Good for shortest path in a graph (Dijikstra).
+  * Take the optimal solution at each step (even if worse overall). Good for shortest path in a graph (Dijkstra).
 * Divide-and-Conquer
   * Break into chunks, process (often recursively), and merge results.
   * Lends to parallelization, requires more space, best when merging takes less time than solving sub-problems.
@@ -214,7 +214,7 @@ Stable sort is one that retains order of equal values.
   * Post-order: left, right, root
 * Breadth-First Search (BFS) `O(V + E)`
   * Queue over graphs. Good for shortest path, degrees of separation, GC scanning.
-* Dijkstra
+* Dijkstra (pronounced "die-sktra") `O(E + V*log(V))`
   * Find shortest path between one node and ALL other nodes. Can't have negative weights.
 * A*
   * Extension of Dijkstra which achieves better time performance by using heuristics.
