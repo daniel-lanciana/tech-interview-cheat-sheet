@@ -8,11 +8,27 @@ A handly refresher list for engineering code interviews.
 
 ### Do
 
-* Turn up
+* An important algorithm design technique is to use sorting as a basic building block, because many other problems become easy once a set of items is sorted.
 
 ### Avoid
 
 * aaa
+
+## Big O Complexity
+
+The measurement of processing time (number of algorithm steps) as an input size grows—not the objective performance of a program (e.g. constant time could be 1,000 years, exponential time for a small number of `n` may be fast). 
+
+Multiple complexities are reduced to just the largest (e.g. `O(n^2)` + `O(n)` + `O(log n)` has a complexity of just `O(n^2)`). 
+
+constant `1` < logarithmic `log(n)` < linear `n` < super-linear `n*log(n)` < quadratic `n^2` < cubic `n^3` < exponential `2^n` < factorial `n!`
+
+### Combinatorics
+
+- All pairs: `O(n^2)` (double-nested loop)
+- All triples: `O(n^3)` (triple-nested loop)
+- All permutations: `n!` (every combination)
+- All subsets: `2^n` (at each element, fork and select + don't select)
+- `n` over `k` (i.e. `k` items from a set of `n`): `n!/(k!*(n-k)!)`
 
 ## Data Structures
 
@@ -81,14 +97,51 @@ Self-balancing trees automatically balance the height of nodes to keep search op
   * Red-Black tree that maintains a dynamic set of elements, each containing an interval.
 * DAWG (Directed Acyclic Word Graph)
   * Set of all substring, simplar to Suffix tree.
- 
-#### Traversal
 
-* Depth-First Search (DFS). Recursion (stack).
+## Algorithms
+
+* Greedy
+  * Take the optimal solution at each step (even if worse overall)
+* DP (Dynamic Programming)
+  * Confusing name originating from its creator, Richard Bellman, wanting to obfuscate his research!
+  * Break a problem into sub-problems, 
+* Divide-and-Conquer
+  * Break into chunks, process (often recursively), and merge results.
+  * Lends to parallelization, requires more space, best when merging takes less time than solving sub-problems.
+
+## Sorting
+
+* Selection `O(n^2)`
+  * Find minimum, remove from list, repeat.
+* Merge `O(n*log(n))` 
+* Heap `O(n*log(n))`
+  * In-place selection sort with a priority queue implemented by a balanced binary tree.
+* Distribution
+  * Split into buckets, sort. Requires roughly uniform data distribution to be effective.
+* Counting
+  * For repeated elements within a known range, store the counts, then reconstruct. Good for finding mean/median/mode.
+* Radix
+  * Counting sort multiple times on the least significant digit, then the next one, repeat.
+
+## Searching
+
+* Binary `O(logn)`
+  * Must be sorted.
+* Depth-First Search (DFS) `O(V + E)`
+  * Recursion (stack) over graphs. Good for topological sorting, finding cycles, 
   * Pre-order: root, left, right
   * In-order: left, root, right
   * Post-order: left, right, root
-* Breadth-First Search (BFS). Queue.
+* Breadth-First Search (BFS) `O(V + E)`
+  * Queue over graphs. Good for shortest path, degrees of separation, GC scanning.
+* Dijkstra
+  * Find shortest path between one node and ALL other nodes. Can't have negative weights.
+* A*
+  * Extension of Dijkstra which achieves better time performance by using heuristics.
+
+## Bit Operations
+
+`& AND` (both `1`), `| OR` (either `1`), `^ XOR` (single `1`), `<<` left shift (multiply by `2^n`.), `>>` right shift (divide by `2^n`.
 
 ## References
 
