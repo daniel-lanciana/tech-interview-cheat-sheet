@@ -8,11 +8,18 @@ A handly refresher list for engineering code interviews.
 
 ### Do
 
+* Ask clarifying questions (edge cases)
+* Break problem into components
+* Identify tradeoffs
+* Talk out loud
+* Whiteboard approach, code on laptop
+* Naive solution, then optimize
 * An important algorithm design technique is to use sorting as a basic building block, because many other problems become easy once a set of items is sorted.
 
 ### Avoid
 
-* aaa
+* Long stretches of silcence
+* Panic (just an interview)
 
 ## Big O Complexity
 
@@ -40,6 +47,8 @@ A problem can be considered `P` (solution found in polynomial), `NP` (solution v
 
 All about tradoffs—the right tool for the job.
 
+### Linear
+
 * Arrays `[]`
   * **Good**. Storing data (space-efficient), constant indexed lookups, iteration (elements adjacent in memory).
   * **Bad**. Insertions/eletions in the middle, unknown number of elements (fixed-size), linear search (unsorted).
@@ -59,19 +68,17 @@ All about tradoffs—the right tool for the job.
   * **Good**. Ordered data. 
   * **Bad**. Simplistic uses.
 * Hash `{}`
-  * Collision can be handled by an array/list, or double-hashing. Implementations include table, tree or ?
+  * Collision can be handled by an array/list, or double-hashing. Implementations include set (no duplicates, allows null key), map (allows null keys and values) and table (synchronized, no null keys/values).
   * **Good**. Constant lookup (depending on hash collisions), dictionaries.
   * **Bad**. Unordered.
-* Heap
-  * Priority queue, constant min/max (one, not both) retrieval.
 * Bloom filter
   * Probabilistic data structure that allows a query on a set to return either "possibly in set" or "definitely not in set".
 
-### Graphs and Trees
+### Heirarchial (Graphs and Trees)
 
-Graphs are compised of Verticies (nodes) and Edges (connections) that can be directed (one-way) or undirected (bi-directional). Trees are a simply a type of graph.
+Graphs are compised of verticies (nodes), edges (connections), branches and leaves. Can be directed (one-way) or undirected (bi-directional). Trees are a simply a type of graph.
 
-#### Data Structures
+#### Inputs
   
 * Adjacency matrix—multi-dimensional array representing each node and its relationship to other nodes. Constant lookup, lots of space (especially if few edges).
 * Adjacency list—objects pointing to each other. Harder to determine if an edge exists.
@@ -80,8 +87,10 @@ Self-balancing trees automatically balance the height of nodes to keep search op
 
 #### Trees
 
-* Binary Search
-  * Ordered, time based on tree height (balanced), tree rotation on insert/delete. Good for searching `O(log N)`, range searches, in-order traversal, adjacent elements.
+* Binary
+  * Each node has a maximum of 2 children.
+* BST (Binary Search Tree)
+  * Ordered binary tree, time based on tree height (balanced), tree rotation on insert/delete. Good for searching `O(log N)`, range searches, in-order traversal, adjacent elements.
 * Red-Black `new TreeMap()`
   * Painted nodes (red, black -- 1 bit extra per node) and rules to self-balance, rearranged and repainted on insert/delete.
 * Splay
@@ -103,31 +112,63 @@ Self-balancing trees automatically balance the height of nodes to keep search op
   * Red-Black tree that maintains a dynamic set of elements, each containing an interval.
 * DAWG (Directed Acyclic Word Graph)
   * Set of all substring, simplar to Suffix tree.
+* Cartisean
+  * Retains the same order from top-to-bottom as left-to-right
+* Heap
+  * Complete binary tree (all leaves filled except bottom layer), min or max value at root.
 
 ## Algorithms
 
+* Recursion
+  * See: recursion.
 * Greedy
-  * Take the optimal solution at each step (even if worse overall)
-* DP (Dynamic Programming)
-  * Confusing name originating from its creator, Richard Bellman, wanting to obfuscate his research!
-  * Break a problem into sub-problems, 
+  * Take the optimal solution at each step (even if worse overall). Good for shortest path in a graph (Dijikstra).
 * Divide-and-Conquer
   * Break into chunks, process (often recursively), and merge results.
   * Lends to parallelization, requires more space, best when merging takes less time than solving sub-problems.
+* DP (Dynamic Programming)
+  * Confusing name originating from its creator, Richard Bellman, wanting to obfuscate his research!
+  * Smart brute force guessing.
+  * Break a problem into sub-problems, store previous results (memoization, from taking "memos") to avoid re-calculating.
+  * Only useful for computing the same subproblem multiple times (e.g. nth Fibonacci). Find recursion in the problem, top-down memoization, bottom-up use of a table.
+  * Good for left-to-right problems (e.g. substrings), subset sum, 0-1 knapsack (n pick k), min path moving right-or-down, LCS (Longest Common Subsequence), LIS (Longest Increasing Subsequence).
 
 ## Sorting
 
+Stable sort is one that retains order of equal values.
+
+### In-memory
+
+* Bubble `O(n^2)`
+  * Swap adjacent pairs.
 * Selection `O(n^2)`
-  * Find minimum, remove from list, repeat.
-* Merge `O(n*log(n))` 
+  * Find the next minimum, swap, repeat.
+* Insertion `O(n^2)`
+  * Sort next value, swap, repeat.
 * Heap `O(n*log(n))`
-  * In-place selection sort with a priority queue implemented by a balanced binary tree.
-* Distribution
-  * Split into buckets, sort. Requires roughly uniform data distribution to be effective.
+  * In-place selection sort using a heap data structure for constant access to target item. Slower than quicksort, but better worst.
+* Shell
+  * Insertion sort of elements that are ideally far apart.
+
+### Divide-and-conquer
+
+* Quick `O(n*log(n))` 
+  * 2-3x faster than heap/merge, select pivot, sort left/right of pivot, recursion.
+* Merge `O(n*log(n))` 
+  * Split until single element, merge together in order.
+* Tim
+  * Merge natural runs of data (common in the real world) to reduce number of comparisons.
+* Cube
+  * Self-balancing multi-dimensional array! (created 2014)
+
+### N+K
+
+* Distribution `O(n+k)`
+  * Split into buckets (e.g. 1-10, 11-20), sort. Requires roughly uniform data distribution to be effective.
 * Counting
   * For repeated elements within a known range, store the counts, then reconstruct. Good for finding mean/median/mode.
-* Radix
-  * Counting sort multiple times on the least significant digit, then the next one, repeat.
+* Radix `O(n*k)`
+  * Alternative term for 'base' and Latin for 'root'. Count or bucket sort on one radix (least-significant bit, character, etc.) at a time.
 
 ## Searching
 
@@ -213,7 +254,13 @@ Sr No | Layer           | Data unit          | Examples
 * UDP (User Datagram Protocol)
   * Thin layer on top of IP, minimizes delay at cost of 1-5% packet loss, no ordering guarantee, manual data splitting and flow control. Good for real-time data such as gaming and audio/video streaming.
 
+## System Design
+
+* Data replication (cluster of machines, redundancy, eventual consistency, geographic spread, file size, security, distributed)
+
 ## Misc
+
+Heuristics are "rule of thumb" techniques for problem-solving.
 
 ### Bit Operations
 
@@ -227,3 +274,4 @@ Sr No | Layer           | Data unit          | Examples
 ## References
 
 * https://github.com/orrsella/soft-eng-interview-prep
+* MIT introduction to algorithms (Youtube)
