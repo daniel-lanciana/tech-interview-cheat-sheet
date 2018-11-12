@@ -30,6 +30,12 @@ constant `1` < logarithmic `log(n)` < linear `n` < super-linear `n*log(n)` < qua
 - All subsets: `2^n` (at each element, fork and select + don't select)
 - `n` over `k` (i.e. `k` items from a set of `n`): `n!/(k!*(n-k)!)`
 
+### Polynomial Time
+
+An algorithm is considered "fast" if it can be run in polynomial `O(n^k)` time—although not always true in practice (e.g. `O(n^20)`.
+
+A problem can be considered `P` (solution found in polynomial), `NP` (solution verified in polynomial), `NP-complete` (family of `NP` problems with no `P` solution) and `NP-hard` (non-deterministic polynomial).
+
 ## Data Structures
 
 All about tradoffs—the right tool for the job.
@@ -139,9 +145,84 @@ Self-balancing trees automatically balance the height of nodes to keep search op
 * A*
   * Extension of Dijkstra which achieves better time performance by using heuristics.
 
-## Bit Operations
+## Processes and Threads
+
+* Process. Self-contained execution environment with it's own memory space (synonymous with programs or applications) containing 1-or-more threads. 
+* Thread. Execution environment within a proces, shares process memory, fewer resources to spawn. Context switching between threads (of a single process, or multiple) running on CPUs cost time.
+
+* Stack. LIFO memory per thread execution, fast (simple access pattern).
+* Heap. Program memory, shared between threads.
+* Virtual Memory. Abstraction that virtualizes memory as a continuous address space.
+
+* Lock. Restricts mutation of object to a single thread (at any given time), slower.
+* Monitor. Cross-thread lock.
+* Mutex. Cross-process lock (i.e. system-wide) to syncronize access to a resource (e.g. CD drive).
+* Semaphore. Lock that allows N threads to access (i.e. pooling).
+
+* Deadlock. Threads lock a resource required by the other. Stalemate. Avoid by setting an order for locks (e.g. A then B).
+* Livelock. Threads infinitely repsond to the action of the other. Two people passing in a corridoor (each shifting left/right at the same time). Avoid by adding some randomness.
+* Starvation. Thread unable to access a resource.
+* Race Condition. Multiple threads mutating shared data at the same time, uncertain ordering of processing. Avoid with locks or timestamps.
+
+## OO
+
+* Encapsulation—reusable, self-contained (sometimes "black-box") components of related state and behavior.
+* Inheritance—defined behavior and characterstics between objects.
+* Polymorphism—different objects that share the same in interface ("many forms") and can be used interchangeably.
+
+## Design Patterns
+
+### Creation
+
+- Factory
+- Builder
+- Singleton
+
+### Composition (Structural)
+
+- Adapter
+- Facade
+- Decorator
+- Proxy
+
+### Behavioral
+
+- Chain of responsibility
+- Command
+- Iterator
+- Visitor
+
+## Networking
+
+### Layers
+
+Sr No | Layer           | Data unit          | Examples
+------|-----------------|--------------------|-------------------------------------
+1    | Physical         | bit                | Ethernet, USB, Wi-Fi, Bluetooth, DSL
+2    | Data link        | Frame              | L2TP, PPP
+3    | Network          | Packet             | IPv4, IPv6
+4    | Transport        | Segment (Datagram) | TCP, UDP
+5    | Session          | Data               | HTTP, FTP, SMTP, DNS, IMAP, SSH, TLS
+6    | Presentation     | Data               | ASCII, JPEG
+7    | Application      | Data               | Chrome, Mail.app
+
+* IP (Inernet Protocol)
+  * Packet routing around connectivity problems (dropped packets), no delivery guarantee, multiple copies, multiple paths.
+* TCP (Transmission Control Protocol)
+  * Built on top of IP, connection-based between computers, splits data into packets, guarantees arrival and ordering of packets, flow control.
+* UDP (User Datagram Protocol)
+  * Thin layer on top of IP, minimizes delay at cost of 1-5% packet loss, no ordering guarantee, manual data splitting and flow control. Good for real-time data such as gaming and audio/video streaming.
+
+## Misc
+
+### Bit Operations
 
 `& AND` (both `1`), `| OR` (either `1`), `^ XOR` (single `1`), `<<` left shift (multiply by `2^n`.), `>>` right shift (divide by `2^n`.
+
+### Character Sets
+
+* ASCII (American Standard Code for Information Interchange). Basic set of 128 characters in 7 bits, with ANSI standards for characters 128-255 (the 1 extra bit) that differ between countries/languages.
+* Unicode. Most used, 120,000 characters mapping to unique hex numbers (code points). Example: `A = 41 (U+0041)`. Encoded (to bytes) using UTF-8, which is compatible with ASCII.
 
 ## References
 
