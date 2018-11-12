@@ -1,5 +1,37 @@
 # Tech Interview Cheat Sheet
 
+- [Overview](#overview)
+- [General](#general)
+	- [Do](#do)
+	- [Avoid](#avoid)
+- [Big O Complexity](#big-o-complexity)
+	- [Combinatorics](#combinatorics)
+	- [Polynomial Time](#polynomial-time)
+- [Data Structures](#data-structures)
+	- [Linear](#linear)
+	- [Heirarchial (Graphs and Trees)](#heirarchial-graphs-and-trees)
+		- [Inputs](#inputs)
+		- [Trees](#trees)
+- [Algorithms](#algorithms)
+- [Sorting](#sorting)
+	- [In-memory](#in-memory)
+	- [Divide-and-conquer](#divide-and-conquer)
+	- [N+K](#nk)
+- [Searching](#searching)
+- [Processes and Threads](#processes-and-threads)
+- [OO](#oo)
+- [Design Patterns](#design-patterns)
+	- [Creation](#creation)
+	- [Composition (Structural)](#composition-structural)
+	- [Behavioral](#behavioral)
+- [Networking](#networking)
+	- [Layers](#layers)
+- [System Design](#system-design)
+- [Misc](#misc)
+	- [Bit Operations](#bit-operations)
+	- [Character Sets](#character-sets)
+- [References](#references)
+
 ## Overview
 
 A handly refresher list for engineering code interviews.
@@ -131,7 +163,7 @@ Self-balancing trees automatically balance the height of nodes to keep search op
   * Smart brute force guessing.
   * Break a problem into sub-problems, store previous results (memoization, from taking "memos") to avoid re-calculating.
   * Only useful for computing the same subproblem multiple times (e.g. nth Fibonacci). Find recursion in the problem, top-down memoization, bottom-up use of a table.
-  * Good for left-to-right problems (e.g. substrings), subset sum, 0-1 knapsack (n pick k), min path moving right-or-down, LCS (Longest Common Subsequence), LIS (Longest Increasing Subsequence).
+  * Good for left-to-right problems (e.g. substrings), subset sum, 0-1 knapsack (n-choose-k), min path moving right-or-down, LCS (Longest Common Subsequence), LIS (Longest Increasing Subsequence).
 
 ## Sorting
 
@@ -257,6 +289,12 @@ Sr No | Layer           | Data unit          | Examples
 ## System Design
 
 * Data replication (cluster of machines, redundancy, eventual consistency, geographic spread, file size, security, distributed)
+* Rate limiting APIs
+* Spelling suggestion (read dictionary, standardize lowercase/stripped, frequency count, find variants adding/removing/transposing characters, past/plural tenses, generate all variants, store, sort by score)
+* Search engine (crawler, store content/metadata, index, query, ranking, re-index)
+  * Query types (single word, phrase), similar searches, context (georgraphy, time), tokenize query words and union results.
+  * Ranking. Weight words within a document, count and quality of linking documents (weighted graph with node containing sum)
+* Design Twitter. Fan-out vs fan-in, push vs pull, Beirber effect, more reads than writes, Redis clusters, deliver messages in under 5sec.
 
 ## Misc
 
