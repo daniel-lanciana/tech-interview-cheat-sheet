@@ -295,12 +295,13 @@ Sr No | Layer           | Data unit          | Examples
 ## System Design
 
 * Data replication (cluster of machines, redundancy, eventual consistency, geographic spread, file size, security, distributed)
-* Rate limiting APIs
+* Rate limiting APIs (exponential backoff)
 * Spelling suggestion (read dictionary, standardize lowercase/stripped, frequency count, find variants adding/removing/transposing characters, past/plural tenses, generate all variants, store, sort by score)
 * Search engine (crawler, store content/metadata, index, query, ranking, re-index)
   * Query types (single word, phrase), similar searches, context (georgraphy, time), tokenize query words and union results.
   * Ranking. Weight words within a document, count and quality of linking documents (weighted graph with node containing sum)
 * Design Twitter. Fan-out vs fan-in, push vs pull, Beirber effect, more reads than writes, Redis clusters, deliver messages in under 5sec.
+* Circuit breaker (temporarily protect upstream services from further 5xx requests if it fails by (https://engineering.grab.com/img/designing-resilient-systems-part-1/cb-circuit-open.png)["opening the circuit"] so it can recover). Potential fallback to other service providers.
 
 ## Misc
 
