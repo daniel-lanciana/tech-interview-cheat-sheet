@@ -41,9 +41,9 @@ A handly refresher list for engineering code interviews.
 
 ### Do
 
-* Ask clarifying questions (edge cases)
+* Ask clarifying questions (user story, constraints, edge cases)
 * Break problem into components
-* Identify tradeoffs
+* Identify bottlenecks, tradeoffs
 * Talk out loud
 * Whiteboard approach, code on laptop
 * Naive solution, then optimize
@@ -291,9 +291,16 @@ Sr No | Layer           | Data unit          | Examples
   * Built on top of IP, connection-based between computers, splits data into packets, guarantees arrival and ordering of packets, flow control.
 * UDP (User Datagram Protocol)
   * Thin layer on top of IP, minimizes delay at cost of 1-5% packet loss, no ordering guarantee, manual data splitting and flow control. Good for real-time data such as gaming and audio/video streaming.
+* RPC (Remote Procedure Call)
+  * As if executed locally, communication layer abstracted away. Performant but tighter coupling and harder upgradability.
+* REpresentational State Transfer (REST)  
+  * Stateless, HATEOS, Graph API
 
 ## System Design
 
+* Scaling (vertical, horizontal, caching, load balancing, replication, partitioning, map-reduce, CDN -- push/pull, fan-out service, hash collisions)
+* Concurrency, networking, real-world performance, availability, performance
+* Web app: SEO (server-side rendering), progressive enhancement, graceful degredation, lazy loading, HTTP/2, tooling, responsive design
 * Data replication (cluster of machines, redundancy, eventual consistency, geographic spread, file size, security, distributed)
 * Rate limiting APIs (exponential backoff)
 * Spelling suggestion (read dictionary, standardize lowercase/stripped, frequency count, find variants adding/removing/transposing characters, past/plural tenses, generate all variants, store, sort by score)
@@ -302,6 +309,17 @@ Sr No | Layer           | Data unit          | Examples
   * Ranking. Weight words within a document, count and quality of linking documents (weighted graph with node containing sum)
 * Design Twitter. Fan-out vs fan-in, push vs pull, Beirber effect, more reads than writes, Redis clusters, deliver messages in under 5sec.
 * Circuit breaker (temporarily protect upstream services from further 5xx requests if it fails by (https://engineering.grab.com/img/designing-resilient-systems-part-1/cb-circuit-open.png)["opening the circuit"] so it can recover). Potential fallback to other service providers.
+* Trade-offs: Performance vs scalability, availability vs consistency, usability vs security, latency vs throughput
+* CAP Theorem (Consistency, Availability, Partition tolerance). CP and AP.
+* Consistency (weak, eventual, strong)
+* Availability (fail-over -- active/passive or active/active, replication)
+* DNS (browser, DNS servers, propagation, NS, MX, A, CNAME, Route53)
+* Load Balancer (SSL termination, sticky sessions, Layer4 routing, Layer7, stateless, reverse proxy unified interface)
+* Microservices (service discovery / mesh, internal communication gRPC)
+* Database (ACID, master/slave or master/master replication, federation, sharding, RDBMS, NoSQL, Graph, normalization, denormalization for read performance)
+* Caching (client/browser, CDN, web server, database, application, TTL, invalidation, cache-aside, write-through, write-back, refresh-ahead)
+* Async (message queues, task queues, back pressure)
+* Security (encryption in transit and at rest, sanitize inputs, hash passwords, least priviledge, MFA, OWASP)
 
 ## Misc
 
@@ -316,7 +334,60 @@ Heuristics are "rule of thumb" techniques for problem-solving.
 * ASCII (American Standard Code for Information Interchange). Basic set of 128 characters in 7 bits, with ANSI standards for characters 128-255 (the 1 extra bit) that differ between countries/languages.
 * Unicode. Most used, 120,000 characters mapping to unique hex numbers (code points). Example: `A = 41 (U+0041)`. Encoded (to bytes) using UTF-8, which is compatible with ASCII.
 
+### Powers of 2
+
+```
+Power           Exact Value         Approx Value        Bytes
+---------------------------------------------------------------
+7                             128
+8                             256
+10                           1024   1 thousand           1 KB
+16                         65,536                       64 KB
+20                      1,048,576   1 million            1 MB
+30                  1,073,741,824   1 billion            1 GB
+32                  4,294,967,296                        4 GB
+40              1,099,511,627,776   1 trillion           1 TB
+```
+
+### Latency numbers every programmer should know
+
+```
+Latency Comparison Numbers
+--------------------------
+L1 cache reference                           0.5 ns
+Branch mispredict                            5   ns
+L2 cache reference                           7   ns                      14x L1 cache
+Mutex lock/unlock                           25   ns
+Main memory reference                      100   ns                      20x L2 cache, 200x L1 cache
+Compress 1K bytes with Zippy            10,000   ns       10 us
+Send 1 KB bytes over 1 Gbps network     10,000   ns       10 us
+Read 4 KB randomly from SSD*           150,000   ns      150 us          ~1GB/sec SSD
+Read 1 MB sequentially from memory     250,000   ns      250 us
+Round trip within same datacenter      500,000   ns      500 us
+Read 1 MB sequentially from SSD*     1,000,000   ns    1,000 us    1 ms  ~1GB/sec SSD, 4X memory
+Disk seek                           10,000,000   ns   10,000 us   10 ms  20x datacenter roundtrip
+Read 1 MB sequentially from 1 Gbps  10,000,000   ns   10,000 us   10 ms  40x memory, 10X SSD
+Read 1 MB sequentially from disk    30,000,000   ns   30,000 us   30 ms 120x memory, 30X SSD
+Send packet CA->Netherlands->CA    150,000,000   ns  150,000 us  150 ms
+
+Notes
+-----
+1 ns = 10^-9 seconds
+1 us = 10^-6 seconds = 1,000 ns
+1 ms = 10^-3 seconds = 1,000 us = 1,000,000 ns
+```
+
+Handy metrics based on numbers above:
+
+* Read sequentially from disk at 30 MB/s
+* Read sequentially from 1 Gbps Ethernet at 100 MB/s
+* Read sequentially from SSD at 1 GB/s
+* Read sequentially from main memory at 4 GB/s
+* 6-7 world-wide round trips per second
+* 2,000 round trips per second within a data center
+
 ## References
 
+* https://github.com/donnemartin/system-design-primer/blob/master/README.md (EXCELLENT system design primer)
 * https://github.com/orrsella/soft-eng-interview-prep
 * MIT introduction to algorithms (Youtube)
