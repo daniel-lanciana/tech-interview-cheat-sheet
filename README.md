@@ -251,6 +251,14 @@ Stable sort is one that retains order of equal values.
 * Inheritance—defined behavior and characterstics between objects.
 * Polymorphism—different objects that share the same in interface ("many forms") and can be used interchangeably.
 
+### SOLID Principles
+
+* Single-responsiblity (classes do a single job)
+* Open-closed (classes open for extension, closed for modification)
+* Liskov substitution (every subclass/derived class should be substitutable for their base/parent class)
+* Interface segregation (don't be forced to implement unused interfaces or interface methods)
+* Dependency Inversion (depend on abstractions, not concrete implementations i.e. Dependency Injection)
+
 ### Creation
 
 - Factory
