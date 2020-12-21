@@ -47,7 +47,8 @@ A handly refresher list for engineering code interviews.
 * Talk out loud
 * Whiteboard approach, code on laptop
 * Naive solution, then optimize
-* An important algorithm design technique is to use sorting as a basic building block, because many other problems become easy once a set of items is sorted.
+* An important algorithm design technique is to use sorting as a basic building block, because many other problems become easy once a set of items is sorted
+* Time/space complexity, resource (e.g. network) estimation
 
 ### Avoid
 
@@ -394,8 +395,13 @@ Handy metrics based on numbers above:
 * 6-7 world-wide round trips per second
 * 2,000 round trips per second within a data center
 
+## TODO
+
+* Set theory, inite-state machines, regular expressions, matrix multiplication, bitwise operations, solving linear equations, important combinatorics concepts such as permutations, combinations, pigeonhole principle, processes/threads (OS, locks, mutex, semaphores, deadlock, livelock), data structures (e.g. linked-lists), distributed hash table, queues/schedulers, dynamic vs compiled, strongly vs weakly typed, functional vs imerative, parallelization (e.g. mapreduce)
+
 ## References
 
 * https://github.com/donnemartin/system-design-primer/blob/master/README.md (EXCELLENT system design primer)
 * https://github.com/orrsella/soft-eng-interview-prep
 * MIT introduction to algorithms (Youtube)
+* https://techiedelight.quora.com/500-Data-Structures-and-Algorithms-interview-questions-and-their-solutions
